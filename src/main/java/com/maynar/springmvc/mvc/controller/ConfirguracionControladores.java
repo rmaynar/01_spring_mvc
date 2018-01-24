@@ -1,7 +1,11 @@
 package com.maynar.springmvc.mvc.controller;
 
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.maynar.springmvc.mvc.validadores.PersonaNombreNotNullValidator;
 
 /**
  * Permite que todos los controladores gestionados por
@@ -18,5 +22,11 @@ public class ConfirguracionControladores {
 	@ModelAttribute("generos")
 	public String[] generos() {
 		return new String[] { "Masculino", "Femenino" };
+	}
+	
+	
+	@InitBinder
+	public void initBinder(final WebDataBinder binder) {
+		binder.addValidators(new PersonaNombreNotNullValidator());
 	}
 }

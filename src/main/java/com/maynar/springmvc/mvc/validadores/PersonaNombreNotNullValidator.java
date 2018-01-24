@@ -9,8 +9,7 @@ public class PersonaNombreNotNullValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		return Persona.class.equals(arg0);
 	}
 
 	@Override
@@ -19,7 +18,7 @@ public class PersonaNombreNotNullValidator implements Validator {
 		 * Invocamos la lógica necesaria para validar		
 		 */
 		if(((Persona)arg0).getNombre()==null || ((Persona)arg0).getNombre().equals("")) {
-			arg1.rejectValue("nombre","formulario.persona.error.nombre");
+			arg1.rejectValue("nombre","formulario.persona.error.nombre","Error personalizado");
 		}
 		
 	}
