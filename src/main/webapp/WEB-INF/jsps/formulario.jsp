@@ -30,31 +30,38 @@
 			</p>
 		</div>
 	</div>
-	<form:form modelAttribute="persona" method="POST" action="formulario">
-		<div class="form-group">
-			<label for="nombrePersona">Nombre</label> 
-			<form:input  path="nombre" type="text" class="form-control" id="nombrePersona"
-				placeholder="Nombre"/>
+	<main>
+		<div class="row">
+			<div class="col-xl-4 col-xl-offset-4">
+				<form:form modelAttribute="persona" method="POST" action="formulario">
+					<div class="form-group">
+						<label for="nombrePersona">Nombre</label> 
+						<form:input  path="nombre" type="text" class="form-control" id="nombrePersona"
+							placeholder="Nombre"/>
+						<form:errors path="nombre" class="alert-danger"></form:errors>
+					</div>
+					<div class="form-group">
+						<label for="apellidosPersona">Apellidos</label> 
+						<form:input  path="apellidos" type="text" class="form-control" id="apellidosPersona"
+							placeholder="Apellidos"/>
+						<form:errors path="apellidos" class="alert-danger"></form:errors>
+					</div>
+					<div class="form-group">
+						<label for="sexoPersona">Género</label> 
+						<form:select  path="sexo" class="form-control" id="sexoPersona"
+						items="${generos}"/>
+					</div>
+			<!-- 		<fieldset> -->
+			<!-- 			<label>Generos</label> -->
+			<%-- 			<c:forEach items="${generos}" var="g"> --%>
+			<!-- 				<input type="radio" name="elRadio"> -->
+			<%-- 				<c:out value="${g}"></c:out></> --%>
+			<%-- 			</c:forEach> --%>
+			<!-- 		</fieldset> -->
+					<button type="submit" class="btn btn-primary">Enviar</button>
+				</form:form>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="apellidosPersona">Apellidos</label> 
-			<form:input  path="apellidos" type="text" class="form-control" id="apellidosPersona"
-				placeholder="Apellidos"/>
-		</div>
-		<div class="form-group">
-			<label for="sexoPersona">Género</label> 
-			<form:select  path="sexo" class="form-control" id="sexoPersona"
-			items="${generos}"/>
-		</div>
-<!-- 		<fieldset> -->
-<!-- 			<label>Generos</label> -->
-<%-- 			<c:forEach items="${generos}" var="g"> --%>
-<!-- 				<input type="radio" name="elRadio"> -->
-<%-- 				<c:out value="${g}"></c:out></> --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</fieldset> -->
-		<button type="submit" class="btn btn-primary">Enviar</button>
-	</form:form>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

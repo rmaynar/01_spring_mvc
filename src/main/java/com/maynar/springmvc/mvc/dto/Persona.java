@@ -1,9 +1,17 @@
 package com.maynar.springmvc.mvc.dto;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 public class Persona {
 
 	private int id;
+	@NotEmpty
+	@Length(min=2)
 	private String nombre;
+	@NotEmpty
+	@Length(min=4)
 	private String apellidos;
 	private String sexo;
 	public int getId() {
