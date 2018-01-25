@@ -24,9 +24,7 @@ public class ControladorSimpsons {
 	private SimpsonsService servicioSimpsons;
 	
 	/**
-	 * Recibe una persona en json, le cambia el nombre y devuelve en json
-	 * @param persona
-	 * @param nombreNuevo
+	 * GET
 	 * @return
 	 */
 	@RequestMapping(path = "/simpsons/{id}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
@@ -38,9 +36,7 @@ public class ControladorSimpsons {
 	}
 	
 	/**
-	 * Recibe una persona en json, le cambia el nombre y devuelve en json
-	 * @param persona
-	 * @param nombreNuevo
+	 * POST
 	 * @return
 	 */
 	@RequestMapping(path = "/simpsons", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
@@ -57,9 +53,7 @@ public class ControladorSimpsons {
 		return respuesta;
 	}
 	/**
-	 * Recibe una persona en json, le cambia el nombre y devuelve en json
-	 * @param persona
-	 * @param nombreNuevo
+	 * PUT
 	 * @return
 	 */
 	@RequestMapping(path = "/simpsons/{id}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
@@ -72,11 +66,29 @@ public class ControladorSimpsons {
 		ResponseEntity<String> respuesta = null;
 		if(!servicioSimpsons.delete(simpson)) {
 			estado = HttpStatus.FORBIDDEN;
-			respuesta = new ResponseEntity<String>("{Mensaje:\"Eliminado con éxito\"}", estado);
+			respuesta = new ResponseEntity<String>("{\"Mensaje\":\"No se ha podido eliminar\"}", estado);
 		}else {
-			respuesta = new ResponseEntity<String>("{Mensaje:\"Eliminado con éxito\"}", estado);
+			respuesta = new ResponseEntity<String>("{\"Mensaje\":\"Eliminado con éxito\"}", estado);
 		}
 		return respuesta;
 	}
-	
+	/**
+	 * Recibe una persona en json, le cambia el nombre y devuelve en json
+	 * @param persona
+	 * @param nombreNuevo
+	 * @return
+	 */
+	@RequestMapping(path = "/simpsons", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+	@ResponseBody 
+	public ResponseEntity<Simpson> modificarSimpson(@RequestBody Simpson simpson) {
+		
+		HttpStatus estado = HttpStatus.OK;
+		simpson = servicioSimpsons.update(simpson);
+		if(simpson==null) {
+			estado = HttpStatus.FORBIDDEN;
+		}
+		ResponseEntity<Simpson> respuesta = new ResponseEntity<Simpson>(simpson, estado);
+		
+		return respuesta;
+	}
 }
