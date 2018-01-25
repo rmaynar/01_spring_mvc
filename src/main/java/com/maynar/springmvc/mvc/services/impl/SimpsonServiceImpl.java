@@ -8,9 +8,9 @@ import com.maynar.springmvc.mvc.services.SimpsonsService;
 public class SimpsonServiceImpl implements SimpsonsService {
 
 	@Override
-	public Simpson delete(Simpson s) {
+	public boolean delete(Simpson s) {
 		// TODO Auto-generated method stub
-		return null;
+		return true;
 	}
 
 	@Override

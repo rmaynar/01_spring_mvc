@@ -12,14 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.maynar.springmvc.entities.Simpson;
 import com.maynar.springmvc.mvc.services.SimpsonsService;
 
 @Controller
-//@RequestMapping(path = "/simpsons")
 @ComponentScan(basePackages="com.maynar.springmvc.mvc.services")
 public class ControladorSimpsons {
 	//Beans de logica y servicio
@@ -56,7 +52,7 @@ public class ControladorSimpsons {
 		if(simpson==null) {
 			estado = HttpStatus.FORBIDDEN;
 		}
-		ResponseEntity<Simpson> respuesta = new ResponseEntity<Simpson>(simpson, HttpStatus.ACCEPTED);
+		ResponseEntity<Simpson> respuesta = new ResponseEntity<Simpson>(simpson, estado);
 		
 		return respuesta;
 	}
@@ -66,10 +62,21 @@ public class ControladorSimpsons {
 	 * @param nombreNuevo
 	 * @return
 	 */
-//	@RequestMapping(path = "/simpsons", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-//	@ResponseBody public Simpson insertarSimpson(@RequestBody Simpson simpson, @RequestParam String nombreNuevo) {
-//		servicioSimpsons.create(simpson);
-//		return simpson;
-//	}
+	@RequestMapping(path = "/simpsons/{id}", produces=MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+	@ResponseBody 
+	public ResponseEntity<String> eliminarSimpson(@PathVariable String id){
+		
+		HttpStatus estado = HttpStatus.OK;
+		Simpson simpson = new Simpson();
+		simpson.setNombre(id);
+		ResponseEntity<String> respuesta = null;
+		if(!servicioSimpsons.delete(simpson)) {
+			estado = HttpStatus.FORBIDDEN;
+			respuesta = new ResponseEntity<String>("{Mensaje:\"Eliminado con éxito\"}", estado);
+		}else {
+			respuesta = new ResponseEntity<String>("{Mensaje:\"Eliminado con éxito\"}", estado);
+		}
+		return respuesta;
+	}
 	
 }
