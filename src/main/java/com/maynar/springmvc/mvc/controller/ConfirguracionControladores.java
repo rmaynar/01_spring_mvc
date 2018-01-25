@@ -24,9 +24,11 @@ public class ConfirguracionControladores {
 		return new String[] { "Masculino", "Femenino" };
 	}
 	
-	
-	@InitBinder
-	public void initBinder(final WebDataBinder binder) {
-		binder.addValidators(new PersonaNombreNotNullValidator());
-	}
+	/**
+	 * comentado para los simpsons
+	 */
+//	@InitBinder
+//	public void initBinder(final WebDataBinder binder) {
+//		binder.addValidators(new PersonaNombreNotNullValidator());
+//	}
 }

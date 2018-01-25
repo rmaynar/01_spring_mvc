@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 public class Persona {
 
 	private int id;
-	@NotEmpty
+	@NotEmpty(message="{notempty.persona.nombre}")
 	@Length(min=2)
 	private String nombre;
 	@NotEmpty
